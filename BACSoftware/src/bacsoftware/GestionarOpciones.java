@@ -5,6 +5,17 @@
  */
 package bacsoftware;
 
+import java.awt.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Yumelir
@@ -14,8 +25,16 @@ public class GestionarOpciones extends javax.swing.JFrame {
     /**
      * Creates new form GestionarOpciones
      */
+    String act;
+    int camb, secc;
+    ArrayList<String> categoria, subCategoria;
+    
     public GestionarOpciones() {
         initComponents();
+        camb =-1;
+        cargarInfo();
+        
+                 
     }
 
     /**
@@ -27,22 +46,24 @@ public class GestionarOpciones extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel8 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        nuevoLabel = new javax.swing.JLabel();
+        nuevoItem = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        accion = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
+        seccion = new javax.swing.JComboBox<>();
+        existeItem = new javax.swing.JComboBox<>();
+        existeLabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        labelCateg = new javax.swing.JLabel();
+        categ = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel8.setText("Nuevo Elemento:");
+        nuevoLabel.setText("Nuevo Elemento:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Software del Banco de Alimentos de Cuernavaca");
@@ -52,20 +73,20 @@ public class GestionarOpciones extends javax.swing.JFrame {
 
         jLabel6.setText("Acción a realizar:");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agregar", "Eliminar", "Modificar" }));
+        accion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agregar", "Eliminar", "Modificar" }));
 
         jLabel7.setText("Sección:");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Categoría (Entradas y Salidas)", "Subcategoría (Entradas y Salidas)", "Tipo de Salida (Salidas)", "Procedencia (Entradas)" }));
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+        seccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Categoría (Entradas y Salidas)", "Subcategoría (Entradas y Salidas)"}));
+        seccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox4ActionPerformed(evt);
+                seccionActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        existeItem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
 
-        jLabel2.setText("Elemento Existente:");
+        existeLabel.setText("Elemento Existente:");
 
         jButton1.setText("Guardar Cambios");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -84,80 +105,258 @@ public class GestionarOpciones extends javax.swing.JFrame {
             }
         });
 
+        labelCateg.setText("Categoría:");
+
+        categ.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addContainerGap(141, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(287, 287, 287)
-                        .addComponent(jButton1))
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(accion, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(seccion, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(98, 98, 98)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel8))
+                            .addComponent(existeLabel)
+                            .addComponent(nuevoLabel)
+                            .addComponent(labelCateg))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3))
-                                .addGap(42, 42, 42))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(existeItem, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(categ, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nuevoItem, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jButton3))
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(289, 289, 289)
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(accion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(seccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(existeItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(existeLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(31, 31, 31)
+                    .addComponent(nuevoItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nuevoLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelCateg)
+                    .addComponent(categ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
                 .addComponent(jButton1)
-                .addGap(30, 30, 30))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+    private void seccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seccionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox4ActionPerformed
+    }//GEN-LAST:event_seccionActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String sql, opc = "";
+        int aux, id = 0;
+        Conexion con = new Conexion();
+        Connection reg = con.conexion();
+        boolean repeat = true;
+        PreparedStatement pst;
+        
+        if(secc == 0)
+        {
+            sql = "SELECT COUNT(nombreCategoria) FROM categoria WHERE nombreCategoria = '" + nuevoItem.getText() + "'";
+            try {
+                Statement st;
+                st = reg.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                while(rs.next())
+                {
+                    if(rs.getString(1).equals("1")) 
+                    {
+                        JOptionPane.showMessageDialog(null, "ERROR: Categoría ya existente");
+                        nuevoItem.setText("");
+                        
+                    }else repeat = false;
+                    
+                    //System.out.println(id);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(GestionarOpciones.class.getName()).log(Level.SEVERE, null, ex);
+            }   
+        }else
+        {
+            sql = "SELECT COUNT(nombreSubcategoria) FROM subcategoria WHERE nombreSubcategoria = '" + nuevoItem.getText() + "'";
+            try {
+                Statement st;
+                st = reg.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                while(rs.next())
+                {
+                    if(rs.getString(1).equals("1")) 
+                    {
+                        JOptionPane.showMessageDialog(null, "ERROR: Categoría ya existente");
+                        nuevoItem.setText("");
+                        
+                    }else repeat = false;
+                    
+                    //id = rs.getInt(2);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(GestionarOpciones.class.getName()).log(Level.SEVERE, null, ex);
+            }  
+        }
+        
+        
+        
+        switch(act)
+        {
+            case "Agregar":
+                if(!repeat)
+                {
+                    try
+                    {
+                        if(secc == 0)
+                        {
+                            sql = "INSERT INTO categoria(nombreCategoria) VALUES (?)";
+                            pst = reg.prepareStatement(sql);
+                            pst.setString(1, nuevoItem.getText());
+                            
+                        }else
+                        {
+                            int idCat = 0;
+                            sql = "SELECT idCategoria FROM categoria WHERE nombreCategoria = '" + categ.getSelectedItem().toString() + "'";
+                            Statement st;
+                            st = reg.createStatement();
+                            ResultSet rs = st.executeQuery(sql);
+                            while(rs.next())
+                            {
+                                idCat = rs.getInt(1);
+                            }
+                            
+                            sql = "INSERT INTO subcategoria(nombreSubcategoria, fk_idCategoria) VALUES (?,?)";
+                            pst = reg.prepareStatement(sql);
+                            pst.setString(1, nuevoItem.getText());
+                            pst.setInt(2, idCat);
+                        }
+                        
+                        aux = pst.executeUpdate();
+                        if(aux > 0)
+                        {
+                            JOptionPane.showMessageDialog(null, "Registrado con éxito");
+                            nuevoItem.setText("");
+                        }
+                        
+                    } catch(Exception ex)
+                    {
+                        Logger.getLogger(GestionarOpciones.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                
+                break;
+                
+            case "Eliminar":
+                /*nuevoLabel.setVisible(false);
+                nuevoItem.setVisible(false);
+                existeLabel.setVisible(true);
+                existeItem.setVisible(true);  */              
+                break;
+                
+            case "Modificar":
+                if(!repeat)
+                {
+                    try
+                    {
+                        if(secc == 0)
+                        {
+                            sql = "SELECT idCategoria FROM categoria WHERE nombreCategoria = '" + existeItem.getSelectedItem().toString() + "'";
+                            Statement st;
+                            st = reg.createStatement();
+                            ResultSet rs = st.executeQuery(sql);
+                            while(rs.next())
+                            {
+                                id = rs.getInt(1);
+                            }
+                            
+                            sql = "UPDATE categoria SET nombreCategoria = ? WHERE idCategoria = ?";
+                        }                    
+                        else
+                        {
+                            sql = "SELECT idSubcategoria FROM subcategoria WHERE nombreSubcategoria = '" + existeItem.getSelectedItem().toString() + "'";
+                            Statement st;
+                            st = reg.createStatement();
+                            ResultSet rs = st.executeQuery(sql);
+                            while(rs.next())
+                            {
+                                id = rs.getInt(1);
+                            }
+                            sql = "UPDATE subcategoria SET nombreSubcategoria = ? WHERE idSubcategoria = ?";
+                        }
+                        
+                            pst = reg.prepareStatement(sql);
+                            opc = nuevoItem.getText();
+                            pst.setString(1, opc);
+                            pst.setInt(2, id);
+                            
+                            aux = pst.executeUpdate();
+                            
+                            if(aux > 0)
+                            {
+                                JOptionPane.showMessageDialog(null, "Modificación exitosa");
+                                nuevoItem.setText("");
+                            }
+                            
+                            //System.out.println(id);
+                            
+                    } catch (Exception ex)
+                    {
+                        Logger.getLogger(GestionarOpciones.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                }
+                break;
+        }
+        
+        cargarInfo();
+        //showOpc();
+        camb = -1;
+        //existeItem.setSelectedItem(opc);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -167,6 +366,122 @@ public class GestionarOpciones extends javax.swing.JFrame {
             this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    
+    public void cargarInfo()
+    {
+        categoria = new ArrayList<>();
+        subCategoria = new ArrayList<>();
+        String sql;
+        Conexion con = new Conexion();
+        Connection reg = con.conexion();
+        
+        sql = "SELECT nombreCategoria FROM categoria";
+        
+        try {
+            Statement st;
+            st = reg.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next())
+            {
+                categoria.add(rs.getString(1));
+            }
+            
+            sql = "SELECT nombreSubcategoria FROM subcategoria";
+            
+            st = reg.createStatement();
+            rs = st.executeQuery(sql);
+            while(rs.next())
+            {
+                subCategoria.add(rs.getString(1));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionarOpciones.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+        
+    }
+    
+    public void showOpc()
+    {
+        String sql;
+        act = accion.getSelectedItem().toString();
+        secc = seccion.getSelectedIndex();
+        
+        
+        //existeItem.removeAllItems();
+        if(camb != secc)
+        {
+             existeItem.removeAllItems();
+             //REMOVER TODO DE LA LISTA;
+            if(secc == 0)
+            {
+                for(int n = 0; n < categoria.size(); n++)
+                {
+                    existeItem.addItem(categoria.get(n).toString());
+                }
+                
+                camb = 0;
+            
+            }else
+            {
+                for(int n = 0; n < categoria.size(); n++)
+                {
+                    categ.addItem(categoria.get(n).toString());
+                }
+                
+                for(int n = 0; n < subCategoria.size(); n++)
+                {
+                    existeItem.addItem(subCategoria.get(n).toString());
+                }
+                camb = 1;
+            }
+            
+        }
+        
+        
+        
+        
+        switch(act)
+        {
+            case "Agregar":
+                existeLabel.setVisible(false);
+                existeItem.setVisible(false);
+                nuevoLabel.setVisible(true);
+                nuevoItem.setVisible(true);
+                if(secc == 1)
+                {
+                    labelCateg.setVisible(true);
+                    categ.setVisible(true);
+                }else
+                {
+                    labelCateg.setVisible(false);
+                    categ.setVisible(false);
+                }
+                    
+                break;
+                
+            case "Eliminar":
+                nuevoLabel.setVisible(false);
+                nuevoItem.setVisible(false);
+                existeLabel.setVisible(true);
+                existeItem.setVisible(true);  
+                labelCateg.setVisible(false);
+                categ.setVisible(false);
+                break;
+                
+            case "Modificar":
+                nuevoLabel.setVisible(true);
+                nuevoItem.setVisible(true);
+                existeLabel.setVisible(true);
+                existeItem.setVisible(true);
+                labelCateg.setVisible(false);
+                categ.setVisible(false);
+                break;
+        }
+        
+        
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -195,25 +510,37 @@ public class GestionarOpciones extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        
+        GestionarOpciones opc = new GestionarOpciones();
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GestionarOpciones().setVisible(true);
+                opc.setVisible(true);
             }
         });
+        
+        while(true)
+        {
+            opc.showOpc();
+        }
+            
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> accion;
+    private javax.swing.JComboBox<String> categ;
+    private javax.swing.JComboBox<String> existeItem;
+    private javax.swing.JLabel existeLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel labelCateg;
+    private javax.swing.JTextField nuevoItem;
+    private javax.swing.JLabel nuevoLabel;
+    private javax.swing.JComboBox<String> seccion;
     // End of variables declaration//GEN-END:variables
 }
