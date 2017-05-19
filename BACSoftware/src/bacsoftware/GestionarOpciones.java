@@ -291,10 +291,28 @@ public class GestionarOpciones extends javax.swing.JFrame {
                 break;
                 
             case "Eliminar":
-                /*nuevoLabel.setVisible(false);
-                nuevoItem.setVisible(false);
-                existeLabel.setVisible(true);
-                existeItem.setVisible(true);  */              
+                try
+                {
+                    if(secc == 0)
+                    {
+                        sql = "DELETE FROM categoria WHERE nombreCategoria = ?";
+                        pst = reg.prepareStatement(sql);
+                        pst.setString(1, existeItem.getSelectedItem().toString());
+                        aux = pst.executeUpdate();
+                    }else
+                    {
+                        sql = "DELETE FROM subcategoria WHERE nombreSubcategoria = ?";
+                        pst = reg.prepareStatement(sql);
+                        pst.setString(1, existeItem.getSelectedItem().toString());
+                        aux = pst.executeUpdate();
+                    }
+                    
+                    if(aux > 0)
+                        JOptionPane.showMessageDialog(null, "Eliminado con éxito");
+                } catch (SQLException ex) {
+                    Logger.getLogger(GestionarOpciones.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                             
                 break;
                 
             case "Modificar":
