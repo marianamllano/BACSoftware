@@ -57,11 +57,17 @@ public class GestionarOpciones extends javax.swing.JFrame {
         existeItem = new javax.swing.JComboBox<>();
         existeLabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+<<<<<<< HEAD
         labelCateg = new javax.swing.JLabel();
         categ = new javax.swing.JComboBox<>();
         jTextField6 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+=======
+        jButton3 = new javax.swing.JButton();
+        labelCateg = new javax.swing.JLabel();
+        categ = new javax.swing.JComboBox<>();
+>>>>>>> refs/remotes/origin/Luigi
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,11 +122,16 @@ public class GestionarOpciones extends javax.swing.JFrame {
             }
         });
 
+        labelCateg.setText("Categoría:");
+
+        categ.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(jLabel1)
@@ -163,13 +174,57 @@ public class GestionarOpciones extends javax.swing.JFrame {
                         .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
+=======
+                .addGap(66, 66, 66)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addContainerGap(141, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(accion, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(seccion, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(existeLabel)
+                            .addComponent(nuevoLabel)
+                            .addComponent(labelCateg))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(existeItem, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(categ, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nuevoItem, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton3))
+                .addContainerGap(163, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(289, 289, 289)
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
+>>>>>>> refs/remotes/origin/Luigi
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton2)
                     .addComponent(jLabel1))
+=======
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+>>>>>>> refs/remotes/origin/Luigi
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -182,7 +237,11 @@ public class GestionarOpciones extends javax.swing.JFrame {
                     .addComponent(accion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(seccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+<<<<<<< HEAD
                 .addGap(36, 36, 36)
+=======
+                .addGap(35, 35, 35)
+>>>>>>> refs/remotes/origin/Luigi
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(existeItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(existeLabel))
@@ -194,9 +253,15 @@ public class GestionarOpciones extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelCateg)
                     .addComponent(categ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+<<<<<<< HEAD
                 .addGap(34, 34, 34)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+=======
+                .addGap(19, 19, 19)
+                .addComponent(jButton1)
+                .addContainerGap())
+>>>>>>> refs/remotes/origin/Luigi
         );
 
         setSize(new java.awt.Dimension(705, 381));
@@ -309,10 +374,35 @@ public class GestionarOpciones extends javax.swing.JFrame {
                 break;
                 
             case "Eliminar":
+<<<<<<< HEAD
                 /*nuevoLabel.setVisible(false);
                 nuevoItem.setVisible(false);
                 existeLabel.setVisible(true);
                 existeItem.setVisible(true);  */              
+=======
+                try
+                {
+                    if(secc == 0)
+                    {
+                        sql = "DELETE FROM categoria WHERE nombreCategoria = ?";
+                        pst = reg.prepareStatement(sql);
+                        pst.setString(1, existeItem.getSelectedItem().toString());
+                        aux = pst.executeUpdate();
+                    }else
+                    {
+                        sql = "DELETE FROM subcategoria WHERE nombreSubcategoria = ?";
+                        pst = reg.prepareStatement(sql);
+                        pst.setString(1, existeItem.getSelectedItem().toString());
+                        aux = pst.executeUpdate();
+                    }
+                    
+                    if(aux > 0)
+                        JOptionPane.showMessageDialog(null, "Eliminado con éxito");
+                } catch (SQLException ex) {
+                    Logger.getLogger(GestionarOpciones.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                             
+>>>>>>> refs/remotes/origin/Luigi
                 break;
                 
             case "Modificar":
@@ -552,13 +642,20 @@ public class GestionarOpciones extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> existeItem;
     private javax.swing.JLabel existeLabel;
     private javax.swing.JButton jButton1;
+<<<<<<< HEAD
     private javax.swing.JButton jButton2;
+=======
+    private javax.swing.JButton jButton3;
+>>>>>>> refs/remotes/origin/Luigi
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+<<<<<<< HEAD
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+=======
+>>>>>>> refs/remotes/origin/Luigi
     private javax.swing.JLabel labelCateg;
     private javax.swing.JTextField nuevoItem;
     private javax.swing.JLabel nuevoLabel;

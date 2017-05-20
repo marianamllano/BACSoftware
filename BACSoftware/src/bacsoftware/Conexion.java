@@ -5,16 +5,25 @@
  */
 package bacsoftware;
 import java.sql.*;
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+>>>>>>> refs/remotes/origin/Luigi
 /**
  *
  * @author yayod
  */
 public class Conexion {
+<<<<<<< HEAD
     
     
     public Connection conexion(){
         Connection con = null;
+=======
+    Connection con = null;
+    
+    public Connection conexion(){
+>>>>>>> refs/remotes/origin/Luigi
         try{
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/bac", "root", "");
@@ -25,6 +34,7 @@ public class Conexion {
         }        
         return con;
     }
+<<<<<<< HEAD
     
     public ArrayList<Data> getInventario() throws SQLException
     {
@@ -56,6 +66,8 @@ public class Conexion {
         con.close();
         return datos;
     }
+=======
+>>>>>>> refs/remotes/origin/Luigi
 }
 
 
