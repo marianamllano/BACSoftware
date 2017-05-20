@@ -35,6 +35,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         etUser = new javax.swing.JTextField();
         etpwd = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,7 +57,7 @@ public class InicioSesion extends javax.swing.JFrame {
         tvInicio.setFont(new java.awt.Font("Baskerville Old Face", 0, 36)); // NOI18N
         tvInicio.setText("INICIO");
 
-        jTextField5.setBackground(new java.awt.Color(0, 0, 102));
+        jTextField5.setBackground(new java.awt.Color(255, 102, 0));
 
         etUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +70,8 @@ public class InicioSesion extends javax.swing.JFrame {
                 etpwdActionPerformed(evt);
             }
         });
+
+        jTextField6.setBackground(new java.awt.Color(0, 102, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,10 +97,15 @@ public class InicioSesion extends javax.swing.JFrame {
                         .addGap(130, 130, 130)
                         .addComponent(btnIniciar)))
                 .addContainerGap(91, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTextField5)
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(21, 21, 21)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(20, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,9 +127,15 @@ public class InicioSesion extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addComponent(btnIniciar)
                 .addContainerGap(28, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(89, 89, 89)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(204, Short.MAX_VALUE)))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(418, 347));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
@@ -177,6 +191,7 @@ public class InicioSesion extends javax.swing.JFrame {
     private javax.swing.JTextField etpwd;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel tvInicio;
     private javax.swing.JLabel tvPwd;
     private javax.swing.JLabel tvUser;
